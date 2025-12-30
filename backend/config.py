@@ -1,46 +1,40 @@
-from pydantic_settings import BaseSettings
-from typing import List
 import os
+from typing import List
+from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 
 load_dotenv()
 
 class Settings(BaseSettings):
-    # Application Settings
+    # App Settings
     APP_NAME: str = "Best Moments"
-    DEBUG: bool = os.getenv("DEBUG", "True") == "True"
-    HOST: str = os.getenv("HOST", "0.0.0.0")
-    PORT: int = int(os.getenv("PORT", 8000))
+    APP_VERSION: str = "1.0.0"
+    DEBUG: bool = os.getenv('DEBUG', 'False').lower() == 'true'
+    
+    # Server Settings
+    HOST: str = os.getenv('HOST', '0.0.0.0')
+    PORT: int = int(os.getenv('PORT', 8000))
     
     # Database Settings
-    MONGODB_URL: str = os.getenv("MONGODB_URL", "mongodb://localhost:27017")
-    DATABASE_NAME: str = os.getenv("DATABASE_NAME", "best_moments_db")
+    MONGODB_URL: str = os.getenv('MONGODB_URL', 'mongodb://localhost:27017')
+    MONGODB_DB_NAME: str = os.getenv('MONGODB_DB_NAME', 'best_moments')
     
     # AWS S3 Settings
-    AWS_ACCESS_KEY_ID: str = os.getenv("AWS_ACCESS_KEY_ID", "")
-    AWS_SECRET_ACCESS_KEY: str = os.getenv("AWS_SECRET_ACCESS_KEY", "")
-    AWS_REGION: str = os.getenv("AWS_REGION", "us-east-1")
-    S3_BUCKET_NAME: str = os.getenv("S3_BUCKET_NAME", "best-moments-images")
+    AWS_ACCESS_KEY_ID: str = os.getenv('AWS_ACCESS_KEY_ID', '')
+    AWS_SECRET_ACCESS_KEY: str = os.getenv('AWS_SECRET_ACCESS_KEY', '')
+    AWS_REGION: str = os.getenv('AWS_REGION', 'us-east-1')
+    S3_BUCKET_NAME: str = os.getenv('S3_BUCKET_NAME', '')
+    CLOUDFRONT_DOMAIN: str = os.getenv('CLOUDFRONT_DOMAIN', '')
     
-    # OpenAI Settings (for image generation)
-    OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
+    # CORS Settings
+    CORS_ORIGINS: List[str] = os.getenv('CORS_ORIGINS', 'http://localhost:3000').split(',')
     
-    # Security Settings
-    SECRET_KEY: str = os.getenv("SECRET_KEY", "your-secret-key-change-in-production")
-    ALLOWED_ORIGINS: List[str] = [
-        "http://localhost:3000",
-        "http://localhost:5173",
-        "http://127.0.0.1:3000",
-    ]
+    # Frontend URL
+    FRONTEND_URL: str = os.getenv('FRONTEND_URL', 'http://localhost:3000')
     
-    # Event Settings
-    EVENT_CODE_LENGTH: int = 8
-    MAX_IMAGE_SIZE_MB: int = 10
-    ALLOWED_IMAGE_FORMATS: List[str] = ["image/jpeg", "image/jpg", "image/png", "image/webp"]
-    
-    # Template Settings
-    TEMPLATE_CATEGORIES: List[str] = ["wedding", "birthday", "engagement", "annoprasan", "other"]
-    TEMPLATES_PER_CATEGORY: int = 5
+    # File Upload Settings
+    MAX_FILE_SIZE: int = 10 * 1024 * 1024  # 10MB
+    ALLOWED_IMAGE_TYPES: List[str] = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp']
     
     class Config:
         env_file = ".env"
