@@ -3,34 +3,35 @@ import { persist } from 'zustand/middleware'
 
 const useEventStore = create(
   persist(
-    (set, get) => ({
+    (set) => ({
+      // Current event being created
       currentEvent: null,
-      recentEvents: [],
-      userPhone: null,
-
-      // Set current event
       setCurrentEvent: (event) => set({ currentEvent: event }),
-
-      // Clear current event
-      clearCurrentEvent: () => set({ currentEvent: null }),
-
-      // Add to recent events
-      addRecentEvent: (event) => {
-        const recent = get().recentEvents
-        const filtered = recent.filter((e) => e.id !== event.id)
-        set({ recentEvents: [event, ...filtered].slice(0, 10) })
-      },
-
-      // Set user phone
+      
+      // Recently viewed/created events
+      recentEvents: [],
+      addRecentEvent: (event) =>
+        set((state) => ({
+          recentEvents: [
+            event,
+            ...state.recentEvents.filter((e) => e.id !== event.id),
+          ].slice(0, 10), // Keep only last 10
+        })),
+      
+      // User phone number for quick access
+      userPhone: null,
       setUserPhone: (phone) => set({ userPhone: phone }),
-
-      // Get event by code from recent
-      getRecentEventByCode: (code) => {
-        return get().recentEvents.find((e) => e.event_code === code)
-      },
+      
+      // Clear all data
+      clearStore: () =>
+        set({
+          currentEvent: null,
+          recentEvents: [],
+          userPhone: null,
+        }),
     }),
     {
-      name: 'event-storage',
+      name: 'best-moments-storage', // LocalStorage key
     }
   )
 )
