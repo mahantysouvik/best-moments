@@ -7,7 +7,7 @@ import { Toaster } from 'react-hot-toast'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/best-moments">
       <App />
       <Toaster
         position="top-right"
