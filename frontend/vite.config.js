@@ -9,7 +9,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  base: '/best-moments/',
+  base: './',
   server: {
     port: 3000,
     proxy: {

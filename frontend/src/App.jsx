@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -12,7 +12,7 @@ import NotFound from './pages/NotFound'
 
 function App() {
   return (
-    <Router basename="/best-moments">
+    <Router>
       <div className="min-h-screen flex flex-col bg-gradient-to-br from-purple-50 via-white to-pink-50">
         <Navbar />
         <main className="flex-grow">
