@@ -1,103 +1,106 @@
-import { Link, useLocation } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { Camera, Menu, X, Sparkles } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { Camera, Menu, X } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const location = useLocation()
-
-  const isActive = (path) => location.pathname === path
-
-  const menuItems = [
-    { path: '/', label: 'Home' },
-    { path: '/create', label: 'Create Event' },
-    { path: '/my-events', label: 'My Events' },
-  ]
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className="bg-white/80 backdrop-blur-lg shadow-lg sticky top-0 z-50 border-b border-purple-100"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+    <nav className="bg-white shadow-lg sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group">
-            <motion.div
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
-              className="bg-gradient-to-br from-purple-600 to-pink-600 p-2.5 rounded-xl shadow-lg"
-            >
-              <Camera className="w-7 h-7 text-white" />
-            </motion.div>
-            <div>
-              <h1 className="text-2xl font-display font-bold gradient-text">
-                Best Moments
-              </h1>
-              <p className="text-xs text-gray-500 flex items-center gap-1">
-                <Sparkles className="w-3 h-3" />
-                Capture memories
-              </p>
+          <Link to="/" className="flex items-center gap-2 group">
+            <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-2 rounded-xl group-hover:scale-110 transition-transform">
+              <Camera className="w-6 h-6 text-white" />
             </div>
+            <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Best Moments
+            </span>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-2">
-            {menuItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 ${
-                  isActive(item.path)
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
-                    : 'text-gray-700 hover:bg-purple-50 hover:text-purple-600'
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+          <div className="hidden md:flex items-center gap-6">
+            <Link
+              to="/"
+              className="text-gray-700 hover:text-purple-600 font-semibold transition-colors"
+            >
+              Home
+            </Link>
+            <Link
+              to="/create"
+              className="text-gray-700 hover:text-purple-600 font-semibold transition-colors"
+            >
+              Create Event
+            </Link>
+            <Link
+              to="/events"
+              className="text-gray-700 hover:text-purple-600 font-semibold transition-colors"
+            >
+              My Events
+            </Link>
+            <Link
+              to="/create"
+              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-xl font-semibold hover:shadow-lg transition-all"
+            >
+              Get Started
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-xl hover:bg-purple-50 transition-colors"
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100"
           >
-            {isMenuOpen ? (
-              <X className="w-6 h-6 text-purple-600" />
-            ) : (
-              <Menu className="w-6 h-6 text-purple-600" />
-            )}
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
+      </div>
 
-        {/* Mobile Menu */}
-        {isMenuOpen && (
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="md:hidden py-4 space-y-2"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="md:hidden bg-white border-t overflow-hidden"
           >
-            {menuItems.map((item) => (
+            <div className="px-4 py-4 space-y-3">
               <Link
-                key={item.path}
-                to={item.path}
-                onClick={() => setIsMenuOpen(false)}
-                className={`block px-4 py-3 rounded-xl font-semibold transition-all ${
-                  isActive(item.path)
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
-                    : 'text-gray-700 hover:bg-purple-50'
-                }`}
+                to="/"
+                onClick={() => setIsOpen(false)}
+                className="block text-gray-700 hover:text-purple-600 font-semibold py-2"
               >
-                {item.label}
+                Home
               </Link>
-            ))}
+              <Link
+                to="/create"
+                onClick={() => setIsOpen(false)}
+                className="block text-gray-700 hover:text-purple-600 font-semibold py-2"
+              >
+                Create Event
+              </Link>
+              <Link
+                to="/events"
+                onClick={() => setIsOpen(false)}
+                className="block text-gray-700 hover:text-purple-600 font-semibold py-2"
+              >
+                My Events
+              </Link>
+              <Link
+                to="/create"
+                onClick={() => setIsOpen(false)}
+                className="block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-xl font-semibold text-center"
+              >
+                Get Started
+              </Link>
+            </div>
           </motion.div>
         )}
-      </div>
-    </motion.nav>
+      </AnimatePresence>
+    </nav>
   )
 }
 

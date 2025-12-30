@@ -1,112 +1,67 @@
 import { motion } from 'framer-motion'
-import { Camera, QrCode, Image as ImageIcon, Sparkles } from 'lucide-react'
+import { Camera, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const Hero = () => {
-  const features = [
-    {
-      icon: QrCode,
-      title: 'QR Code Access',
-      description: 'Easy guest access via QR codes',
-    },
-    {
-      icon: Camera,
-      title: 'Instant Upload',
-      description: 'Upload photos in seconds',
-    },
-    {
-      icon: ImageIcon,
-      title: 'Beautiful Albums',
-      description: 'Organize in stunning galleries',
-    },
-  ]
-
   return (
-    <div className="relative overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          className="absolute top-20 right-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
-        />
-        <motion.div
-          animate={{
-            scale: [1.2, 1, 1.2],
-            rotate: [360, 180, 0],
-          }}
-          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-          className="absolute bottom-20 left-10 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
-        />
-      </div>
+    <div className="relative overflow-hidden bg-gradient-to-br from-purple-50 via-white to-pink-50 py-20">
+      {/* Floating Elements */}
+      <motion.div
+        animate={{
+          y: [0, -20, 0],
+          rotate: [0, 5, 0],
+        }}
+        transition={{ duration: 5, repeat: Infinity }}
+        className="absolute top-20 left-10 text-purple-300"
+      >
+        <Sparkles className="w-12 h-12" />
+      </motion.div>
+      <motion.div
+        animate={{
+          y: [0, 20, 0],
+          rotate: [0, -5, 0],
+        }}
+        transition={{ duration: 4, repeat: Infinity }}
+        className="absolute bottom-20 right-10 text-pink-300"
+      >
+        <Camera className="w-16 h-16" />
+      </motion.div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
-        <div className="text-center space-y-8">
-          {/* Main Heading */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-4"
-          >
-            <motion.div
-              animate={{ rotate: [0, 10, -10, 0] }}
-              transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-              className="inline-block"
+      <div className="max-w-7xl mx-auto px-4 text-center relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 bg-clip-text text-transparent">
+              Capture Every
+            </span>
+            <br />
+            <span className="bg-gradient-to-r from-pink-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              Best Moment
+            </span>
+          </h1>
+
+          <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Create stunning event galleries, share with QR codes, and let everyone upload their favorite photos
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/create"
+              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl transform hover:scale-105 transition-all"
             >
-              <Sparkles className="w-16 h-16 text-purple-600 mx-auto mb-4" />
-            </motion.div>
-            <h1 className="text-5xl md:text-7xl font-display font-bold">
-              <span className="gradient-text">Capture Every</span>
-              <br />
-              <span className="gradient-text">Special Moment</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Create beautiful event galleries with QR codes. Let your guests upload and share
-              photos instantly. Make memories that last forever.
-            </p>
-          </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <Link to="/create" className="btn-primary text-lg px-10">
-              Create Your Event
+              Create Event Free
             </Link>
-            <a href="#features" className="btn-secondary text-lg px-10">
-              Learn More
-            </a>
-          </motion.div>
-
-          {/* Feature Cards */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20"
-          >
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ y: -10, scale: 1.05 }}
-                className="card-glass p-8 text-center space-y-4"
-              >
-                <div className="bg-gradient-to-br from-purple-600 to-pink-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
-                  <feature.icon className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+            <Link
+              to="/events"
+              className="bg-white text-purple-600 px-8 py-4 rounded-xl font-bold text-lg border-2 border-purple-600 hover:bg-purple-50 transition-all"
+            >
+              View My Events
+            </Link>
+          </div>
+        </motion.div>
       </div>
     </div>
   )
