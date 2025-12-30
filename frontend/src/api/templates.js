@@ -1,30 +1,26 @@
 import apiClient from './client'
 
+export const createTemplate = (data) => {
+  return apiClient.post('/templates/', data)
+}
+
+export const getTemplateById = (templateId) => {
+  return apiClient.get(`/templates/${templateId}`)
+}
+
+export const listTemplates = (params = {}) => {
+  return apiClient.get('/templates/', { params })
+}
+
+export const listTemplatesByType = (eventType) => {
+  return apiClient.get('/templates/', { params: { event_type: eventType } })
+}
+
 export const templateApi = {
-  // Get all templates
-  getTemplates: async (params = {}) => {
-    return apiClient.get('/templates/', { params })
-  },
-
-  // Get templates by event type
-  getTemplatesByType: async (eventType, params = {}) => {
-    return apiClient.get('/templates/', { params: { event_type: eventType, ...params } })
-  },
-
-  // Get template by ID
-  getTemplate: async (templateId) => {
-    return apiClient.get(`/templates/${templateId}`)
-  },
-
-  // Create template (admin)
-  createTemplate: async (templateData) => {
-    return apiClient.post('/templates/', templateData)
-  },
-
-  // Delete template (admin)
-  deleteTemplate: async (templateId) => {
-    return apiClient.delete(`/templates/${templateId}`)
-  },
+  createTemplate,
+  getTemplateById,
+  listTemplates,
+  listTemplatesByType,
 }
 
 export default templateApi
