@@ -1,52 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-gradient-to-br from-rose-50 via-purple-50 to-pink-50 min-h-screen font-sans;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
 }
 
 @layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent;
+  }
+  
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/70 border border-white/20 shadow-2xl rounded-3xl;
+  }
+  
   .btn-primary {
-    @apply bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none;
+    @apply px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-2xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300;
   }
   
   .btn-secondary {
-    @apply bg-white text-purple-600 font-semibold py-3 px-8 rounded-xl shadow-md hover:shadow-lg border-2 border-purple-200 hover:border-purple-300 transform hover:scale-105 transition-all duration-300;
-  }
-  
-  .btn-outline {
-    @apply border-2 border-purple-300 text-purple-700 font-semibold py-3 px-8 rounded-xl hover:bg-purple-50 transform hover:scale-105 transition-all duration-300;
-  }
-  
-  .card {
-    @apply bg-white rounded-2xl shadow-xl p-6 hover:shadow-2xl transition-all duration-300;
-  }
-  
-  .card-glass {
-    @apply bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl p-6 border border-white/50;
-  }
-  
-  .input-field {
-    @apply w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all duration-300;
-  }
-  
-  .gradient-text {
-    @apply bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent;
-  }
-  
-  .section-title {
-    @apply text-4xl md:text-5xl font-display font-bold gradient-text mb-4;
-  }
-  
-  .section-subtitle {
-    @apply text-xl text-gray-600 mb-8;
+    @apply px-8 py-4 bg-white text-purple-600 font-semibold rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 border-2 border-purple-200;
   }
 }
 
-/* Custom Scrollbar */
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -61,27 +58,5 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #7c3aed, #db2777);
-}
-
-/* Animations */
-@keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
-}
-
-.animate-shimmer {
-  animation: shimmer 2s infinite linear;
-  background: linear-gradient(
-    to right,
-    #f6f7f8 0%,
-    #edeef1 20%,
-    #f6f7f8 40%,
-    #f6f7f8 100%
-  );
-  background-size: 1000px 100%;
+  background: linear-gradient(to bottom, #7e22ce, #db2777);
 }
