@@ -1,0 +1,11 @@
+New frontend deployment: 2026-01-11 23:52 IST
+
+Features:
+- Beautiful homepage with animations
+- Create Event flow with 2 steps
+- Album page with photo grid
+- Gallery lightbox view
+- 404 page
+- Fully responsive
+- Works without backend
+- Mock data for demonstration
