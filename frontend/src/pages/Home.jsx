@@ -1,186 +1,205 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import Hero from '../components/Hero'
-import {
-  QrCode,
-  Upload,
-  Image,
-  Shield,
-  Zap,
-  Users,
-  Heart,
-  Star,
-  CheckCircle,
-} from 'lucide-react'
+import { Camera, QrCode, Image, Sparkles, Heart, Users, Zap, Shield } from 'lucide-react'
 
 const Home = () => {
-  const steps = [
+  const features = [
     {
       icon: QrCode,
-      title: 'Create Event',
-      description: 'Set up your event with beautiful templates and get a unique QR code',
+      title: 'QR Code Access',
+      description: 'Generate unique QR codes for instant guest access',
       color: 'from-purple-500 to-purple-600',
     },
     {
-      icon: Upload,
-      title: 'Share QR Code',
-      description: 'Display your QR code for guests to scan and access the gallery',
+      icon: Camera,
+      title: 'Instant Upload',
+      description: 'Upload and share photos in seconds from any device',
       color: 'from-pink-500 to-pink-600',
     },
     {
       icon: Image,
-      title: 'Collect Photos',
-      description: 'Guests upload photos instantly. Organize them in beautiful albums',
-      color: 'from-purple-500 to-pink-600',
+      title: 'Beautiful Galleries',
+      description: 'Organize memories in stunning, shareable albums',
+      color: 'from-blue-500 to-blue-600',
     },
   ]
 
   const benefits = [
-    { icon: Zap, text: 'Lightning Fast Upload' },
-    { icon: Shield, text: 'Secure & Private' },
-    { icon: Users, text: 'Easy Guest Access' },
-    { icon: Heart, text: 'Beautiful Templates' },
-  ]
-
-  const testimonials = [
     {
-      name: 'Priya Sharma',
-      event: 'Wedding',
-      text: 'Amazing! All our wedding photos in one place. Guests loved the QR code feature!',
-      rating: 5,
+      icon: Zap,
+      title: 'Lightning Fast',
+      description: 'Optimized performance for seamless experience',
     },
     {
-      name: 'Rahul Kumar',
-      event: 'Birthday Party',
-      text: 'Super easy to use. No more asking everyone to share photos separately.',
-      rating: 5,
+      icon: Shield,
+      title: 'Secure & Private',
+      description: 'Your memories are protected and private',
     },
     {
-      name: 'Anita Desai',
-      event: 'Engagement',
-      text: 'The templates are gorgeous! Made our engagement memories even more special.',
-      rating: 5,
+      icon: Users,
+      title: 'Collaborative',
+      description: 'Everyone can contribute to the album',
+    },
+    {
+      icon: Heart,
+      title: 'Made with Love',
+      description: 'Designed for your special moments',
     },
   ]
 
   return (
-    <div>
-      <Hero />
+    <div className="flex-1">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden py-20 px-6">
+        {/* Animated Background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              rotate: [0, 180, 360],
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+            className="absolute -top-40 -right-40 w-96 h-96 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30"
+          />
+          <motion.div
+            animate={{
+              scale: [1.2, 1, 1.2],
+              rotate: [360, 180, 0],
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+            className="absolute -bottom-40 -left-40 w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30"
+          />
+          <motion.div
+            animate={{
+              scale: [1, 1.3, 1],
+              rotate: [0, 90, 180],
+            }}
+            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+            className="absolute top-1/2 left-1/2 w-96 h-96 bg-blue-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+          />
+        </div>
 
-      {/* How It Works */}
-      <section id="features" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center space-y-8"
+          >
+            <motion.div
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
+              className="inline-block"
+            >
+              <Sparkles className="w-20 h-20 text-purple-600 mx-auto" />
+            </motion.div>
+
+            <h1 className="text-6xl md:text-8xl font-bold leading-tight">
+              <span className="gradient-text">Capture Every</span>
+              <br />
+              <span className="gradient-text">Special Moment</span>
+            </h1>
+
+            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Create beautiful event galleries with QR codes. Let your guests upload and share photos
+              instantly. Make memories that last forever.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
+              <Link to="/create" className="btn-primary text-lg">
+                🎉 Create Your Event
+              </Link>
+              <a href="#features" className="btn-secondary text-lg">
+                Learn More →
+              </a>
+            </div>
+
+            {/* Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-16"
+            >
+              <div className="text-center">
+                <p className="text-4xl font-bold gradient-text">1000+</p>
+                <p className="text-gray-600 text-sm">Events Created</p>
+              </div>
+              <div className="text-center">
+                <p className="text-4xl font-bold gradient-text">50K+</p>
+                <p className="text-gray-600 text-sm">Photos Shared</p>
+              </div>
+              <div className="text-center">
+                <p className="text-4xl font-bold gradient-text">100%</p>
+                <p className="text-gray-600 text-sm">Free Forever</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section id="features" className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="section-title">How It Works</h2>
-            <p className="section-subtitle">Three simple steps to capture all your event memories</p>
+            <h2 className="text-5xl font-bold gradient-text mb-4">Powerful Features</h2>
+            <p className="text-xl text-gray-600">Everything you need to capture and share moments</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {steps.map((step, index) => (
+            {features.map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                whileHover={{ y: -10 }}
-                className="relative"
+                whileHover={{ y: -10, scale: 1.02 }}
+                className="glass-card p-8 text-center space-y-4"
               >
-                <div className="card text-center space-y-6 relative overflow-hidden">
-                  {/* Step Number */}
-                  <div className="absolute top-4 right-4 text-6xl font-bold text-purple-100">
-                    {index + 1}
-                  </div>
-
-                  <div
-                    className={`bg-gradient-to-br ${step.color} w-20 h-20 rounded-2xl flex items-center justify-center mx-auto shadow-xl relative z-10`}
-                  >
-                    <step.icon className="w-10 h-10 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-800">{step.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                <div className={`bg-gradient-to-br ${feature.color} w-16 h-16 rounded-2xl flex items-center justify-center mx-auto shadow-xl`}>
+                  <feature.icon className="w-8 h-8 text-white" />
                 </div>
+                <h3 className="text-2xl font-bold text-gray-800">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Benefits */}
-      <section className="py-20 bg-gradient-to-br from-purple-50 to-pink-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Benefits Section */}
+      <section className="py-20 px-6 bg-white/50">
+        <div className="max-w-6xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="section-title">Why Choose Best Moments?</h2>
-            <p className="section-subtitle">
-              The perfect solution for your event photo sharing needs
-            </p>
+            <h2 className="text-5xl font-bold gradient-text mb-4">Why Choose Us?</h2>
+            <p className="text-xl text-gray-600">Built with your needs in mind</p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {benefits.map((benefit, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.1 }}
-                className="card-glass text-center p-6 space-y-4"
+                whileHover={{ scale: 1.05 }}
+                className="glass-card p-6 text-center space-y-3"
               >
-                <div className="bg-gradient-to-br from-purple-600 to-pink-600 w-14 h-14 rounded-xl flex items-center justify-center mx-auto">
-                  <benefit.icon className="w-7 h-7 text-white" />
-                </div>
-                <p className="font-semibold text-gray-800">{benefit.text}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="section-title">Loved by Thousands</h2>
-            <p className="section-subtitle">See what our users have to say</p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                whileHover={{ y: -5 }}
-                className="card space-y-4"
-              >
-                <div className="flex space-x-1">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-gray-700 italic leading-relaxed">"{testimonial.text}"</p>
-                <div>
-                  <p className="font-semibold text-gray-800">{testimonial.name}</p>
-                  <p className="text-sm text-gray-500">{testimonial.event}</p>
-                </div>
+                <benefit.icon className="w-12 h-12 mx-auto text-purple-600" />
+                <h4 className="text-xl font-bold text-gray-800">{benefit.title}</h4>
+                <p className="text-gray-600 text-sm">{benefit.description}</p>
               </motion.div>
             ))}
           </div>
@@ -188,24 +207,20 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-purple-600 via-purple-700 to-pink-600 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
+            className="glass-card p-12 text-center space-y-6"
           >
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">
-              Ready to Create Amazing Memories?
-            </h2>
-            <p className="text-xl text-purple-100 mb-8">
-              Start capturing your special moments today. It's free and takes less than a minute!
+            <h2 className="text-4xl md:text-5xl font-bold gradient-text">Ready to Get Started?</h2>
+            <p className="text-xl text-gray-600">
+              Create your first event in minutes. It's free, easy, and beautiful.
             </p>
-            <Link
-              to="/create"
-              className="inline-block bg-white text-purple-600 font-bold py-4 px-10 rounded-xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300"
-            >
-              Get Started Now
+            <Link to="/create" className="btn-primary text-lg inline-block">
+              ✨ Create Your Event Now
             </Link>
           </motion.div>
         </div>
